@@ -8,5 +8,5 @@ class Detector:
         raise NotImplementedError
 
 def load_detectors():
-    from ..detectors import brute_force, suspicious_endpoints
-    return [brute_force.BruteForceDetector(), suspicious_endpoints.SuspiciousEndpointDetector()]
+    from ..detectors import brute_force, suspicious_endpoints, sql_injection
+    return [brute_force.BruteForceDetector(), suspicious_endpoints.SuspiciousEndpointDetector(), sql_injection.SQLInjectionDetector()]
