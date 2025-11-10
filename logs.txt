@@ -1,0 +1,21 @@
+
+# Normal traffic
+192.168.0.10 - - [09/Nov/2025:18:00:00] "GET /home HTTP/1.1" 200 512
+192.168.0.11 - - [09/Nov/2025:18:00:05] "GET /about HTTP/1.1" 200 256
+
+# Brute force attempts
+192.168.0.20 - - [09/Nov/2025:18:01:00] "POST /login HTTP/1.1" 401 0
+192.168.0.20 - - [09/Nov/2025:18:01:02] "POST /login HTTP/1.1" 401 0
+192.168.0.20 - - [09/Nov/2025:18:01:05] "POST /login HTTP/1.1" 401 0
+
+# SQL injection attempts
+203.0.113.5 - - [09/Nov/2025:18:02:00] "GET /products?id=1 OR 1=1 HTTP/1.1" 200 1024
+203.0.113.6 - - [09/Nov/2025:18:02:05] "GET /search?q=' OR '1'='1' -- HTTP/1.1" 200 512
+
+# Suspicious endpoints
+198.51.100.7 - - [09/Nov/2025:18:03:00] "GET /admin HTTP/1.1" 403 0
+198.51.100.8 - - [09/Nov/2025:18:03:10] "POST /config HTTP/1.1" 404 0
+
+# More normal traffic
+192.168.0.12 - - [09/Nov/2025:18:04:00] "GET /contact HTTP/1.1" 200 128
+192.168.0.13 - - [09/Nov/2025:18:04:15] "GET /blog HTTP/1.1" 200 256
