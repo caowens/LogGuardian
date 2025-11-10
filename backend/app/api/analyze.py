@@ -1,10 +1,11 @@
 from fastapi import APIRouter, UploadFile, File, Form
 from ..services.parser import parse_logs
 from ..services.engine import analyze_records
+from ..models.alert import AlertReport
 
 router = APIRouter()
 
-@router.post("/scan")
+@router.post("/scan", response_model=AlertReport)
 async def scan_logs(text: str = Form(None), upload: UploadFile = File(None)):
     if upload:
         text = (await upload.read()).decode("utf-8")
