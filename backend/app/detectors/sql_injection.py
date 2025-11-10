@@ -13,6 +13,12 @@ class SQLInjectionDetector(Detector):
     description = "Detect basic SQL injection patterns"
 
     def analyze(self, record):
+        """
+        Detects SQL injection patterns.
+        Expects record to contain:
+          - record['path'] (string)
+          - record['raw'] (string)
+        """
         text = " ".join(str(record.get(k,"")) for k in ("path","raw"))
         for pattern in SQL_PATTERNS:
             if re.search(pattern, text, re.IGNORECASE):

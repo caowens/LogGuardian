@@ -7,6 +7,11 @@ class SuspiciousEndpointDetector(Detector):
     description = "Flag access to sensitive or known attack paths"
 
     def analyze(self, record):
+        """
+        Detects access to suspicious endpoints.
+        Expects record to contain:
+          - record['path'] (string)
+        """
         path = record.get("path") or ""
         for target in SUSPICIOUS_PATHS:
             if target in path.lower():
